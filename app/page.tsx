@@ -87,8 +87,8 @@ export default function Home() {
   const balance = totalIncome - totalExpense;
 
   return (
-    <div className="min-h-screen bg-[#f4efe6] flex justify-center items-start p-6">
-      <div className="w-full max-w-4xl bg-[#fdfaf6] rounded-3xl shadow-xl p-8 space-y-8 border border-[#e8dccb]">
+    <div className="min-h-screen bg-[#f4efe6] flex justify-center items-start px-4 py-6 sm:p-8">
+      <div className="w-full max-w-4xl bg-[#fdfaf6] rounded-3xl shadow-xl p-6 sm:p-8 space-y-8 border border-[#e8dccb]">
 
         {/* Logo Section */}
         <div className="flex flex-col items-center gap-2">
@@ -166,7 +166,7 @@ export default function Home() {
         </button>
 
         {/* Summary Cards */}
-        <div className="grid md:grid-cols-3 gap-6 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
           <div className="bg-[#e6d5c3] p-6 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
             <p className="text-sm text-[#5c4033]">Total Income</p>
             <p className="text-xl font-semibold text-[#4b2e2e]">
@@ -194,13 +194,13 @@ export default function Home() {
           {entries.map((entry) => (
             <div
               key={entry.id}
-              className="flex justify-between items-center bg-[#f4efe6] p-4 rounded-xl border border-[#e0d2c3] transition-all duration-500 ease-in-out animate-fadeIn"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center bg-[#f4efe6] p-4 rounded-xl border border-[#e0d2c3] transition-all duration-500 ease-in-out animate-fadeIn gap-2"
             >
-              <span className="text-sm text-[#5c4033]">
+              <span className="text-xs sm:text-sm text-[#5c4033]">
                 {entry.date} | {entry.category} | {entry.mode}
               </span>
 
-              <div className="flex items-center gap-4">
+              <div className="flex justify-between sm:justify-end items-center gap-4">
                 <span
                   className={
                     entry.type === "Income"
@@ -215,8 +215,8 @@ export default function Home() {
                   onClick={() => deleteEntry(entry.id)}
                   className="text-[#8b5e3c] hover:text-[#5c4033] transition-all duration-300 text-sm"
                 >
-                  🗑
-                </button>
+                    🗑
+                  </button>
               </div>
             </div>
           ))}
