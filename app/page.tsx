@@ -20,12 +20,12 @@ export default function Home() {
   const [date, setDate] = useState("");
 
   useEffect(() => {
-    const saved = localStorage.getItem("cashflow-data");
+    const saved = localStorage.getItem("money-tracker-data");
     if (saved) setEntries(JSON.parse(saved));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("cashflow-data", JSON.stringify(entries));
+    localStorage.setItem("money-tracker-data", JSON.stringify(entries));
   }, [entries]);
 
   const addEntry = () => {
@@ -70,7 +70,7 @@ export default function Home() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "calm-cashflow-data.csv");
+    link.setAttribute("download", "money-tracker-data.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -91,13 +91,24 @@ export default function Home() {
       <div className="w-full max-w-4xl bg-[#fdfaf6] rounded-3xl shadow-xl p-6 sm:p-8 space-y-8 border border-[#e8dccb]">
 
         {/* Logo Section */}
-        <div className="flex flex-col items-center gap-2">
-          <div className="w-14 h-14 bg-[#6f4e37] rounded-full flex items-center justify-center shadow-md">
-            <span className="text-white text-lg font-semibold">MC</span>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-16 h-16 bg-[#6f4e37] rounded-full flex items-center justify-center shadow-md">
+            {/* Wallet SVG Icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="white"
+              className="w-8 h-8"
+            >
+              <path d="M21 7H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 10H3V9h18v8z"/>
+              <circle cx="16" cy="13" r="1.5"/>
+            </svg>
           </div>
+
           <h1 className="text-3xl font-semibold text-[#5c4033] tracking-wide">
-            Calm Cashflow
+            Money Tracker
           </h1>
+
           <p className="text-sm text-[#8b735c]">
             Track your money peacefully
           </p>
@@ -167,21 +178,21 @@ export default function Home() {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center">
-          <div className="bg-[#e6d5c3] p-6 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div className="bg-[#e6d5c3] p-6 rounded-2xl shadow-sm">
             <p className="text-sm text-[#5c4033]">Total Income</p>
             <p className="text-xl font-semibold text-[#4b2e2e]">
               ₹ {totalIncome}
             </p>
           </div>
 
-          <div className="bg-[#eddad0] p-6 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div className="bg-[#eddad0] p-6 rounded-2xl shadow-sm">
             <p className="text-sm text-[#5c4033]">Total Expense</p>
             <p className="text-xl font-semibold text-[#4b2e2e]">
               ₹ {totalExpense}
             </p>
           </div>
 
-          <div className="bg-[#d7c3b1] p-6 rounded-2xl shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+          <div className="bg-[#d7c3b1] p-6 rounded-2xl shadow-sm">
             <p className="text-sm text-[#5c4033]">Balance</p>
             <p className="text-xl font-semibold text-[#4b2e2e]">
               ₹ {balance}
@@ -194,7 +205,7 @@ export default function Home() {
           {entries.map((entry) => (
             <div
               key={entry.id}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center bg-[#f4efe6] p-4 rounded-xl border border-[#e0d2c3] transition-all duration-500 ease-in-out animate-fadeIn gap-2"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center bg-[#f4efe6] p-4 rounded-xl border border-[#e0d2c3] gap-2"
             >
               <span className="text-xs sm:text-sm text-[#5c4033]">
                 {entry.date} | {entry.category} | {entry.mode}
@@ -215,8 +226,8 @@ export default function Home() {
                   onClick={() => deleteEntry(entry.id)}
                   className="text-[#8b5e3c] hover:text-[#5c4033] transition-all duration-300 text-sm"
                 >
-                    🗑
-                  </button>
+                  🗑
+                </button>
               </div>
             </div>
           ))}
